@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import { appState } from '$lib/store.svelte';
     import { page } from '$app/state';
+	import { base } from '$app/paths';
 
     let { children } = $props();
 
@@ -30,12 +31,12 @@
 			</div>
 			<ul class="flex gap-1 list-none m-0 p-0">
 				<li>
-					<a href="/" class="block px-4 py-2 rounded-sm text-[0.875rem] font-medium text-text-secondary transition-all duration-200 hover:bg-primary-light hover:text-primary {page.url.pathname === '/' ? 'bg-primary-light text-primary font-semibold' : ''}">
+					<a href="{base}/" class="block px-4 py-2 rounded-sm text-[0.875rem] font-medium text-text-secondary transition-all duration-200 hover:bg-primary-light hover:text-primary {page.url.pathname === base + '/' || page.url.pathname === base ? 'bg-primary-light text-primary font-semibold' : ''}">
 						<i class="fas fa-calculator"></i> {$_('nav.calculator')}
 					</a>
 				</li>
 				<li>
-					<a href="/projection" class="block px-4 py-2 rounded-sm text-[0.875rem] font-medium text-text-secondary transition-all duration-200 hover:bg-primary-light hover:text-primary {page.url.pathname === '/projection' ? 'bg-primary-light text-primary font-semibold' : ''}">
+					<a href="{base}/projection" class="block px-4 py-2 rounded-sm text-[0.875rem] font-medium text-text-secondary transition-all duration-200 hover:bg-primary-light hover:text-primary {page.url.pathname === base + '/projection' ? 'bg-primary-light text-primary font-semibold' : ''}">
 						<i class="fas fa-chart-line"></i> {$_('nav.projection')} &rarr;
 					</a>
 				</li>
@@ -63,7 +64,7 @@
 				</div>
 			</div>
 			<div class="flex gap-2.5 items-center justify-center">
-				<a href="/projection" class="btn btn-primary">
+				<a href="{base}/projection" class="btn btn-primary">
 					<i class="fas fa-chart-line"></i> {$_('sticky.viewProjection')}
 				</a>
 				<button class="btn btn-secondary" onclick={() => appState.reset()}>

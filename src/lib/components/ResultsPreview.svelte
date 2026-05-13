@@ -3,6 +3,7 @@
     import { appState } from '$lib/store.svelte';
     import Chart from 'chart.js/auto';
     import { onMount } from 'svelte';
+    import { base } from '$app/paths';
     
     let chartCanvas: HTMLCanvasElement;
     let chart: Chart;
@@ -126,7 +127,7 @@
             </div>
             <div class="text-center mt-4 flex flex-col gap-4 items-center">
                 <p class="text-[0.8125rem] text-text-secondary m-0">{$_('results.table.showingFirst6Years')}</p>
-                <a href="/projection" class="btn btn-primary">{$_('results.viewFullProjection')}</a>
+                <a href="{base}/projection" class="btn btn-primary">{$_('results.viewFullProjection')}</a>
             </div>
         </div>
     </div>

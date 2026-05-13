@@ -1,6 +1,7 @@
 <script lang="ts">
     import { _ } from 'svelte-i18n';
     import { appState } from '$lib/store.svelte';
+    import { base } from '$app/paths';
     
     function formatCurrency(value: number) {
 		if (isNaN(value) || value === null) return '$--';
@@ -82,7 +83,7 @@
 
     <!-- Action Bar -->
     <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-3 my-6">
-        <a href="/" class="btn btn-secondary flex justify-center">
+        <a href="{base}/" class="btn btn-secondary flex justify-center">
             <i class="fas fa-arrow-left"></i> {$_('results.projection.backToCalculator')}
         </a>
         <button class="btn btn-primary flex justify-center" onclick={handleExport}>
