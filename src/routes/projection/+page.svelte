@@ -58,25 +58,25 @@
 
 <div class="max-w-[1200px] mx-auto px-5 pt-8 pb-10">
     <header class="mb-8">
-        <h1 class="flex items-center gap-3 mb-2 font-serif text-[2.4rem] font-bold">
+        <h1 class="flex items-center gap-3 mb-2 font-serif font-bold">
             <i class="fas fa-table text-primary"></i>
             {$_('results.projection.title')}
         </h1>
-        <p class="text-[1rem] text-text-secondary">{$_('results.projection.subtitle')}</p>
+        <p class="text-[0.9375rem] md:text-[1rem] text-text-secondary">{$_('results.projection.subtitle')}</p>
 
         <!-- Summary Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-7">
-            <div class="bg-card-bg border border-border rounded-lg p-6 text-center shadow transition-all hover:-translate-y-[2px] hover:shadow-lg">
-                <div class="font-sans text-[0.8rem] font-semibold uppercase tracking-[0.08em] text-text-secondary mb-2">{$_('results.projection.totalCost')}</div>
-                <div class="font-serif text-[1.75rem] font-bold text-text leading-[1.2]">{formatCurrency(summary.totalCost)}</div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5 mt-7">
+            <div class="bg-card-bg border border-border rounded-lg p-4 md:p-6 text-center shadow transition-all hover:-translate-y-[2px] hover:shadow-lg">
+                <div class="font-sans text-[0.7rem] md:text-[0.8rem] font-semibold uppercase tracking-[0.08em] text-text-secondary mb-2">{$_('results.projection.totalCost')}</div>
+                <div class="font-serif text-[1.4rem] md:text-[1.75rem] font-bold text-text leading-[1.2]">{formatCurrency(summary.totalCost)}</div>
             </div>
-            <div class="bg-card-bg border border-border rounded-lg p-6 text-center shadow transition-all hover:-translate-y-[2px] hover:shadow-lg">
-                <div class="font-sans text-[0.8rem] font-semibold uppercase tracking-[0.08em] text-text-secondary mb-2">{$_('results.projection.initialInvestment')}</div>
-                <div class="font-serif text-[1.75rem] font-bold text-primary leading-[1.2]">{formatCurrency(summary.requiredInvestment)}</div>
+            <div class="bg-card-bg border border-border rounded-lg p-4 md:p-6 text-center shadow transition-all hover:-translate-y-[2px] hover:shadow-lg">
+                <div class="font-sans text-[0.7rem] md:text-[0.8rem] font-semibold uppercase tracking-[0.08em] text-text-secondary mb-2">{$_('results.projection.initialInvestment')}</div>
+                <div class="font-serif text-[1.4rem] md:text-[1.75rem] font-bold text-primary leading-[1.2]">{formatCurrency(summary.requiredInvestment)}</div>
             </div>
-            <div class="bg-card-bg border border-border rounded-lg p-6 text-center shadow transition-all hover:-translate-y-[2px] hover:shadow-lg">
-                <div class="font-sans text-[0.8rem] font-semibold uppercase tracking-[0.08em] text-text-secondary mb-2">{$_('results.projection.projectionYears')}</div>
-                <div class="font-serif text-[1.75rem] font-bold text-accent leading-[1.2]">{$_('results.table.year')} {firstYear} &mdash; {$_('results.table.year')} {lastYear}</div>
+            <div class="bg-card-bg border border-border rounded-lg p-4 md:p-6 text-center shadow transition-all hover:-translate-y-[2px] hover:shadow-lg">
+                <div class="font-sans text-[0.7rem] md:text-[0.8rem] font-semibold uppercase tracking-[0.08em] text-text-secondary mb-2">{$_('results.projection.projectionYears')}</div>
+                <div class="font-serif text-[1.4rem] md:text-[1.75rem] font-bold text-accent leading-[1.2]">{$_('results.table.year')} {firstYear} &mdash; {$_('results.table.year')} {lastYear}</div>
             </div>
         </div>
     </header>

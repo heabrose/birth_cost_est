@@ -77,7 +77,7 @@
     </h2>
 
     <div class="bg-card-bg rounded shadow border border-border p-6 mb-6">
-        <div class="h-[400px]">
+        <div class="h-[300px] md:h-[400px]">
             <canvas bind:this={chartCanvas}></canvas>
         </div>
     </div>

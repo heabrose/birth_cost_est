@@ -90,19 +90,23 @@
                                             <h4 class="font-sans text-[0.8125rem] font-semibold uppercase tracking-[0.8px] text-text-secondary">{$_(category.i18nKey)}</h4>
                                         </div>
                                         {#each items as key}
-                                            <div class="grid grid-cols-[44px_1fr_130px_80px] sm:grid-cols-[44px_1fr_130px_80px] items-center gap-2.5 py-2.5 border-b border-border/50 last:border-none transition-opacity duration-200 {stage.monthlyCosts[key].enabled ? '' : 'opacity-45 pointer-events-none'}">
-                                                <label class="toggle-switch pointer-events-auto">
+                                            <div class="grid grid-cols-[44px_1fr] sm:grid-cols-[44px_1fr_130px_80px] items-center gap-x-2.5 gap-y-2 py-3 border-b border-border/50 last:border-none transition-opacity duration-200 {stage.monthlyCosts[key].enabled ? '' : 'opacity-45 pointer-events-none'}">
+                                                <label class="toggle-switch pointer-events-auto row-span-1 sm:row-auto">
                                                     <input type="checkbox" bind:checked={stage.monthlyCosts[key].enabled}>
                                                     <span class="toggle-slider"></span>
                                                 </label>
                                                 <span class="text-[0.875rem] font-medium truncate">{$_('costItems.' + key)}</span>
-                                                <div class="input-wrapper">
-                                                    <span class="input-prefix" style="position:static; margin-right:4px;">$</span>
-                                                    <input type="number" class="py-[7px] px-2.5 text-[0.875rem]" min="0" step="10" bind:value={stage.monthlyCosts[key].amount}>
-                                                </div>
-                                                <div class="input-wrapper">
-                                                    <input type="number" class="py-[7px] px-2.5 text-[0.875rem] text-center" min="-20" max="50" step="0.1" bind:value={stage.monthlyCosts[key].yoyIncrease}>
-                                                    <span class="input-suffix" style="position:static; margin-left:2px;">%</span>
+                                                
+                                                <!-- Inputs on mobile should be below or alongside -->
+                                                <div class="col-start-2 flex gap-2 items-center sm:col-auto">
+                                                    <div class="input-wrapper flex-1 sm:flex-none">
+                                                        <span class="input-prefix" style="position:static; margin-right:4px;">$</span>
+                                                        <input type="number" class="py-[7px] px-2.5 text-[0.875rem] w-full sm:w-[120px]" min="0" step="10" bind:value={stage.monthlyCosts[key].amount}>
+                                                    </div>
+                                                    <div class="input-wrapper w-[70px] sm:w-[80px]">
+                                                        <input type="number" class="py-[7px] px-2.5 text-[0.875rem] text-center w-full" min="-20" max="50" step="0.1" bind:value={stage.monthlyCosts[key].yoyIncrease}>
+                                                        <span class="input-suffix" style="position:static; margin-left:2px;">%</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         {/each}
@@ -118,19 +122,22 @@
                                         <h4 class="font-sans text-[0.8125rem] font-semibold uppercase tracking-[0.8px] text-text-secondary">{$_('lifeStages.yearlyOneOff')}</h4>
                                     </div>
                                     {#each yearlyItems as key}
-                                        <div class="grid grid-cols-[44px_1fr_130px_80px] sm:grid-cols-[44px_1fr_130px_80px] items-center gap-2.5 py-2.5 border-b border-border/50 last:border-none transition-opacity duration-200 {stage.yearlyCosts[key].enabled ? '' : 'opacity-45 pointer-events-none'}">
+                                        <div class="grid grid-cols-[44px_1fr] sm:grid-cols-[44px_1fr_130px_80px] items-center gap-x-2.5 gap-y-2 py-3 border-b border-border/50 last:border-none transition-opacity duration-200 {stage.yearlyCosts[key].enabled ? '' : 'opacity-45 pointer-events-none'}">
                                             <label class="toggle-switch pointer-events-auto">
                                                 <input type="checkbox" bind:checked={stage.yearlyCosts[key].enabled}>
                                                 <span class="toggle-slider"></span>
                                             </label>
                                             <span class="text-[0.875rem] font-medium truncate">{$_('costItems.' + key)}</span>
-                                            <div class="input-wrapper">
-                                                <span class="input-prefix" style="position:static; margin-right:4px;">$</span>
-                                                <input type="number" class="py-[7px] px-2.5 text-[0.875rem]" min="0" step="10" bind:value={stage.yearlyCosts[key].amount}>
-                                            </div>
-                                            <div class="input-wrapper">
-                                                <input type="number" class="py-[7px] px-2.5 text-[0.875rem] text-center" min="-20" max="50" step="0.1" bind:value={stage.yearlyCosts[key].yoyIncrease}>
-                                                <span class="input-suffix" style="position:static; margin-left:2px;">%</span>
+                                            
+                                            <div class="col-start-2 flex gap-2 items-center sm:col-auto">
+                                                <div class="input-wrapper flex-1 sm:flex-none">
+                                                    <span class="input-prefix" style="position:static; margin-right:4px;">$</span>
+                                                    <input type="number" class="py-[7px] px-2.5 text-[0.875rem] w-full sm:w-[120px]" min="0" step="10" bind:value={stage.yearlyCosts[key].amount}>
+                                                </div>
+                                                <div class="input-wrapper w-[70px] sm:w-[80px]">
+                                                    <input type="number" class="py-[7px] px-2.5 text-[0.875rem] text-center w-full" min="-20" max="50" step="0.1" bind:value={stage.yearlyCosts[key].yoyIncrease}>
+                                                    <span class="input-suffix" style="position:static; margin-left:2px;">%</span>
+                                                </div>
                                             </div>
                                         </div>
                                     {/each}

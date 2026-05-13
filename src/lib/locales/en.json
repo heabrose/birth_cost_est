@@ -1,11 +1,13 @@
 {
   "app": {
     "title": "Child Cost Calculator",
+    "shortTitle": "Calculator",
     "subtitle": "Plan. Invest. Secure Their Future."
   },
   "nav": {
     "calculator": "Calculator",
-    "projection": "Cash Flow Projection"
+    "projection": "Cash Flow Projection",
+    "projectionShort": "Projection"
   },
   "actions": {
     "quickPresets": "Quick Presets:",

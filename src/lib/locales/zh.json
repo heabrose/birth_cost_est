@@ -1,11 +1,13 @@
 {
   "app": {
     "title": "育兒成本計算器",
+    "shortTitle": "計算器",
     "subtitle": "規劃。投資。保障他們的未來。"
   },
   "nav": {
     "calculator": "計算器",
-    "projection": "現金流預測"
+    "projection": "現金流預測",
+    "projectionShort": "預測"
   },
   "actions": {
     "quickPresets": "快速預設：",

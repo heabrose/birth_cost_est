@@ -5,7 +5,7 @@
 </script>
 
 <header class="text-center pt-10 pb-6">
-    <h1 class="flex items-center justify-center gap-3 mb-2 font-serif text-[2.4rem] font-bold">
+    <h1 class="flex items-center justify-center gap-3 mb-2 font-serif font-bold">
         <i class="fas fa-baby text-primary text-[2rem]"></i>
         {$_('app.title')}
     </h1>

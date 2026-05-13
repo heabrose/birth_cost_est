@@ -37,16 +37,16 @@
 </script>
 
 <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-6 py-4 border-b border-border">
-    <div class="flex items-center gap-3">
-        <span class="text-[0.8125rem] text-text-secondary font-medium">{$_('actions.quickPresets')}</span>
-        <div class="flex gap-2">
-            <button class="pill pill-frugal {appState.data.settings.activeProfile === 'frugal' ? 'active' : ''}" onclick={() => appState.applyProfile('frugal')}>
+    <div class="flex flex-col sm:flex-row items-center gap-3">
+        <span class="text-[0.8125rem] text-text-secondary font-medium shrink-0">{$_('actions.quickPresets')}</span>
+        <div class="flex gap-2 flex-wrap justify-center">
+            <button class="pill pill-frugal px-3 sm:px-4.5 {appState.data.settings.activeProfile === 'frugal' ? 'active' : ''}" onclick={() => appState.applyProfile('frugal')}>
                 <i class="fas fa-leaf"></i> {$_('actions.frugal')}
             </button>
-            <button class="pill pill-average {appState.data.settings.activeProfile === 'average' ? 'active' : ''}" onclick={() => appState.applyProfile('average')}>
+            <button class="pill pill-average px-3 sm:px-4.5 {appState.data.settings.activeProfile === 'average' ? 'active' : ''}" onclick={() => appState.applyProfile('average')}>
                 <i class="fas fa-balance-scale"></i> {$_('actions.average')}
             </button>
-            <button class="pill pill-premium {appState.data.settings.activeProfile === 'premium' ? 'active' : ''}" onclick={() => appState.applyProfile('premium')}>
+            <button class="pill pill-premium px-3 sm:px-4.5 {appState.data.settings.activeProfile === 'premium' ? 'active' : ''}" onclick={() => appState.applyProfile('premium')}>
                 <i class="fas fa-gem"></i> {$_('actions.premium')}
             </button>
         </div>
