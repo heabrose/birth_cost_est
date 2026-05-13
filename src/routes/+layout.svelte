@@ -7,9 +7,30 @@
     import { page } from '$app/state';
 	import { base } from '$app/paths';
 
-    let { children } = $props();
+	import { browser } from '$app/environment';
 
-    function formatCurrencyCompact(value: number) {		if (isNaN(value) || value === null) return '$0';
+	let forcedReady = $state(false);
+
+	if (browser) {
+	console.log('App mounting, calling setupI18n');
+	setupI18n();
+	// Fallback: if i18n takes too long, just show the app anyway
+	setTimeout(() => {
+	if ($isLoading) {
+	console.warn('i18n is taking too long to load, forcing app ready');
+	forcedReady = true;
+	}
+	}, 1500);
+	}
+
+	$effect(() => {
+	console.log('i18n isLoading state:', $isLoading);
+	});
+
+	let { children } = $props();
+
+	function formatCurrencyCompact(value: number) {
+		if (isNaN(value) || value === null) return '$0';
 		const abs = Math.abs(value);
 		if (abs >= 1e6) return '$' + (value / 1e6).toFixed(1) + 'M';
 		if (abs >= 1e3) return '$' + (value / 1e3).toFixed(0) + 'K';
@@ -17,9 +38,12 @@
 	}
 </script>
 
-{#if $isLoading}
+{#if $isLoading && !forcedReady}
 	<div class="flex items-center justify-center min-h-screen">
-		Loading...
+		<div class="text-center">
+			<div class="mb-4"><i class="fas fa-baby fa-spin text-primary text-3xl"></i></div>
+			<div class="text-text-secondary font-medium">Loading Calculator...</div>
+		</div>
 	</div>
 {:else}
 	<!-- Navigation Bar -->

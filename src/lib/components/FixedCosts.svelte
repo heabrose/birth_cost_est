@@ -1,12 +1,8 @@
 <script lang="ts">
     import { _ } from 'svelte-i18n';
     import { appState } from '$lib/store.svelte';
+    import { formatCurrency } from '$lib';
     
-    function formatCurrency(value: number) {
-		if (isNaN(value) || value === null) return '$0';
-		return '$' + Math.round(value).toLocaleString('en-US');
-	}
-
     let home = $derived(appState.data.fixedCosts.homePurchase);
     let car = $derived(appState.data.fixedCosts.carPurchase);
     

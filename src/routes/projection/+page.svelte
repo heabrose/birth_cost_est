@@ -2,11 +2,7 @@
     import { _ } from 'svelte-i18n';
     import { appState } from '$lib/store.svelte';
     import { base } from '$app/paths';
-    
-    function formatCurrency(value: number) {
-		if (isNaN(value) || value === null) return '$--';
-		return '$' + Math.round(value).toLocaleString('en-US');
-	}
+    import { formatCurrency } from '$lib';
     
     function formatPct(value: number) {
         if (isNaN(value) || value === null) return '--%';
@@ -141,7 +137,7 @@
                             <td class="py-3 px-4 border-b border-border text-left font-bold whitespace-nowrap {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">
                                 {#if row.isOneOff}<i class="fas fa-ring mr-1.5" style="color:{row.stageColor};"></i>{/if}{row.year}
                             </td>
-                            <td class="py-3 px-4 border-b border-border text-left text-text-secondary whitespace-nowrap {row.isOneOff ? 'border-t-2 border-t-accent font-semibold text-text' : ''}">{row.age}</td>
+                            <td class="py-3 px-4 border-b border-border text-left text-text-secondary whitespace-nowrap font-medium {row.isOneOff ? 'border-t-2 border-t-accent font-semibold text-text' : ''}">{row.age}</td>
                             <td class="py-3 px-4 border-b border-border text-left whitespace-nowrap {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">
                                 {#if row.isOneOff}
                                     <span class="inline-block px-2.5 py-0.5 rounded-pill bg-accent text-white text-[0.7rem] font-bold uppercase tracking-[0.05em]">{$_('results.table.oneOffLabel')}</span>
@@ -152,11 +148,11 @@
                                 {/if}
                             </td>
                             <td class="py-3 px-4 border-b border-border text-right text-text tabular-nums whitespace-nowrap {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">{formatCurrency(row.breakdown.essentials / 12)}</td>
-                            <td class="py-3 px-4 border-b border-border text-right text-text tabular-nums whitespace-nowrap {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">{formatCurrency(row.breakdown.devCare / 12)}</td>
+                            <td class="py-3 px-4 border-b border-border text-right text-text tabular-nums whitespace-nowrap {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">{formatCurrency(row.breakdown.development / 12)}</td>
                             <td class="py-3 px-4 border-b border-border text-right text-text tabular-nums whitespace-nowrap {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">{formatCurrency(row.breakdown.lifestyle / 12)}</td>
-                            <td class="py-3 px-4 border-b border-border text-right text-text tabular-nums whitespace-nowrap {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">{formatCurrency(row.breakdown.oneOff)}</td>
-                            <td class="py-3 px-4 border-b border-border text-right text-text tabular-nums whitespace-nowrap {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">{formatCurrency(row.mortgage)}</td>
-                            <td class="py-3 px-4 border-b border-border text-right text-text tabular-nums whitespace-nowrap {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">{formatCurrency(row.car)}</td>
+                            <td class="py-3 px-4 border-b border-border text-right text-text tabular-nums whitespace-nowrap {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">{formatCurrency(row.components.yearlyOneOff)}</td>
+                            <td class="py-3 px-4 border-b border-border text-right text-text tabular-nums whitespace-nowrap {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">{formatCurrency(row.components.mortgage)}</td>
+                            <td class="py-3 px-4 border-b border-border text-right text-text tabular-nums whitespace-nowrap {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">{formatCurrency(row.components.car)}</td>
                             <td class="py-3 px-4 border-b border-border text-right tabular-nums whitespace-nowrap font-bold text-[0.95rem] bg-primary/5 {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">{formatCurrency(row.totalAnnual)}</td>
                             <td class="py-3 px-4 border-b border-border text-right tabular-nums whitespace-nowrap text-text-secondary font-medium {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">{formatCurrency(row.cumulative)}</td>
                             <td class="py-3 px-4 border-b border-border text-right tabular-nums whitespace-nowrap font-semibold {row.yoy > 0.1 ? 'text-danger' : (row.yoy < -0.1 ? 'text-success' : 'text-text-secondary')} {row.isOneOff ? 'border-t-2 border-t-accent font-semibold' : ''}">

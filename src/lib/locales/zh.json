@@ -22,7 +22,8 @@
     "title": "設定",
     "inflationRate": "預期年通貨膨脹率 (%)",
     "irr": "預期年回報率 / IRR (%)",
-    "includeMaster": "包含碩士學位"
+    "includeMaster": "包含碩士學位",
+    "weddingAge": "預計結婚年齡"
   },
   "fixedCosts": {
     "title": "固定資本支出",
@@ -83,10 +84,12 @@
     "viewDetailedBreakdown": "查看年度詳細明細",
     "viewFullProjection": "查看完整現金流預測 →",
     "chart": {
-      "essentials": "基礎生活",
-      "devCare": "發展與照護",
-      "lifestyle": "生活方式",
-      "oneOff": "一次性支出"
+      "essentials": "每月必需品",
+      "development": "每月發展與照護",
+      "lifestyle": "每月生活方式",
+      "yearly": "每年 / 一次性",
+      "home": "住房相關",
+      "car": "車輛"
     },
     "table": {
       "year": "年份",

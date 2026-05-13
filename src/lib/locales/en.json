@@ -22,7 +22,8 @@
     "title": "Settings",
     "inflationRate": "Expected Annual Inflation Rate (%)",
     "irr": "Expected Annual Return / IRR (%)",
-    "includeMaster": "Include Master's Degree"
+    "includeMaster": "Include Master's Degree",
+    "weddingAge": "Expected Wedding Age"
   },
   "fixedCosts": {
     "title": "Fixed Capital Expenses",
@@ -83,10 +84,12 @@
     "viewDetailedBreakdown": "View Detailed Yearly Breakdown",
     "viewFullProjection": "View Full Cash Flow Projection →",
     "chart": {
-      "essentials": "Essentials",
-      "devCare": "Dev & Care",
-      "lifestyle": "Lifestyle",
-      "oneOff": "One-off"
+      "essentials": "Monthly Essentials",
+      "development": "Monthly Dev & Care",
+      "lifestyle": "Monthly Lifestyle",
+      "yearly": "Yearly / One-off",
+      "home": "Home Related",
+      "car": "Car"
     },
     "table": {
       "year": "Year",

@@ -21,20 +21,27 @@
     function updateChart() {
         const labels = projectionData.map((p: any) => `Y${p.year}`);
         const essentials = projectionData.map((p: any) => p.breakdown.essentials);
-        const devCare = projectionData.map((p: any) => p.breakdown.devCare);
+        const development = projectionData.map((p: any) => p.breakdown.development);
         const lifestyle = projectionData.map((p: any) => p.breakdown.lifestyle);
-        const oneOff = projectionData.map((p: any) => p.breakdown.oneOff);
+        const yearly = projectionData.map((p: any) => p.breakdown.yearly);
+        const home = projectionData.map((p: any) => p.breakdown.home);
+        const car = projectionData.map((p: any) => p.breakdown.car);
 
         if (chart) {
             chart.data.labels = labels;
             chart.data.datasets[0].label = $_('results.chart.essentials');
-            chart.data.datasets[1].label = $_('results.chart.devCare');
+            chart.data.datasets[1].label = $_('results.chart.development');
             chart.data.datasets[2].label = $_('results.chart.lifestyle');
-            chart.data.datasets[3].label = $_('results.chart.oneOff');
+            chart.data.datasets[3].label = $_('results.chart.yearly');
+            chart.data.datasets[4].label = $_('results.chart.home');
+            chart.data.datasets[5].label = $_('results.chart.car');
+            
             chart.data.datasets[0].data = essentials;
-            chart.data.datasets[1].data = devCare;
+            chart.data.datasets[1].data = development;
             chart.data.datasets[2].data = lifestyle;
-            chart.data.datasets[3].data = oneOff;
+            chart.data.datasets[3].data = yearly;
+            chart.data.datasets[4].data = home;
+            chart.data.datasets[5].data = car;
             chart.update();
         } else {
             chart = new Chart(chartCanvas, {
@@ -42,10 +49,12 @@
                 data: {
                     labels,
                     datasets: [
-                        { label: $_('results.chart.essentials'), data: essentials, backgroundColor: '#5B8C5A', borderRadius: 4 },
-                        { label: $_('results.chart.devCare'), data: devCare, backgroundColor: '#6366F1', borderRadius: 4 },
-                        { label: $_('results.chart.lifestyle'), data: lifestyle, backgroundColor: '#F59E0B', borderRadius: 4 },
-                        { label: $_('results.chart.oneOff'), data: oneOff, backgroundColor: '#D4856A', borderRadius: 4 }
+                        { label: $_('results.chart.essentials'), data: essentials, backgroundColor: '#5B8C5A', borderRadius: 2 },
+                        { label: $_('results.chart.development'), data: development, backgroundColor: '#6366F1', borderRadius: 2 },
+                        { label: $_('results.chart.lifestyle'), data: lifestyle, backgroundColor: '#F59E0B', borderRadius: 2 },
+                        { label: $_('results.chart.yearly'), data: yearly, backgroundColor: '#D4856A', borderRadius: 2 },
+                        { label: $_('results.chart.home'), data: home, backgroundColor: '#0D9488', borderRadius: 2 },
+                        { label: $_('results.chart.car'), data: car, backgroundColor: '#64748B', borderRadius: 2 }
                     ]
                 },
                 options: {
@@ -96,9 +105,8 @@
                             <th class="text-left py-2.5 px-3 font-semibold text-text-secondary border-b-2 border-border text-[0.75rem] uppercase tracking-[0.5px]">{$_('results.table.year')}</th>
                             <th class="text-left py-2.5 px-3 font-semibold text-text-secondary border-b-2 border-border text-[0.75rem] uppercase tracking-[0.5px]">{$_('results.table.age')}</th>
                             <th class="text-right py-2.5 px-3 font-semibold text-text-secondary border-b-2 border-border text-[0.75rem] uppercase tracking-[0.5px]">{$_('results.table.monthlyEssentials')}</th>
+                            <th class="text-right py-2.5 px-3 font-semibold text-text-secondary border-b-2 border-border text-[0.75rem] uppercase tracking-[0.5px]">{$_('results.table.monthlyDevCare')}</th>
                             <th class="text-right py-2.5 px-3 font-semibold text-text-secondary border-b-2 border-border text-[0.75rem] uppercase tracking-[0.5px]">{$_('results.table.yearlyOneOff')}</th>
-                            <th class="text-right py-2.5 px-3 font-semibold text-text-secondary border-b-2 border-border text-[0.75rem] uppercase tracking-[0.5px]">{$_('results.table.mortgage')}</th>
-                            <th class="text-right py-2.5 px-3 font-semibold text-text-secondary border-b-2 border-border text-[0.75rem] uppercase tracking-[0.5px]">{$_('results.table.car')}</th>
                             <th class="text-right py-2.5 px-3 font-semibold text-text-secondary border-b-2 border-border text-[0.75rem] uppercase tracking-[0.5px]">{$_('results.table.totalAnnual')}</th>
                             <th class="text-right py-2.5 px-3 font-semibold text-text-secondary border-b-2 border-border text-[0.75rem] uppercase tracking-[0.5px]">{$_('results.table.cumulative')}</th>
                         </tr>
@@ -107,11 +115,10 @@
                         {#each projectionData.slice(0, 6) as row}
                             <tr class="hover:bg-primary-light">
                                 <td class="py-2.5 px-3 border-b border-border">{$_('results.table.year')} {row.year}</td>
-                                <td class="py-2.5 px-3 border-b border-border">{row.age}</td>
-                                <td class="py-2.5 px-3 border-b border-border text-right">{formatCurrency(row.breakdown.essentials)}</td>
-                                <td class="py-2.5 px-3 border-b border-border text-right">{formatCurrency(row.yearlyOneOff)}</td>
-                                <td class="py-2.5 px-3 border-b border-border text-right">{formatCurrency(row.mortgage)}</td>
-                                <td class="py-2.5 px-3 border-b border-border text-right">{formatCurrency(row.car)}</td>
+                                <td class="py-2.5 px-3 border-b border-border font-medium">{row.age}</td>
+                                <td class="py-2.5 px-3 border-b border-border text-right">{formatCurrency(row.breakdown.essentials / 12)}</td>
+                                <td class="py-2.5 px-3 border-b border-border text-right">{formatCurrency(row.breakdown.development / 12)}</td>
+                                <td class="py-2.5 px-3 border-b border-border text-right">{formatCurrency(row.components.yearlyOneOff)}</td>
                                 <td class="py-2.5 px-3 border-b border-border text-right font-semibold">{formatCurrency(row.totalAnnual)}</td>
                                 <td class="py-2.5 px-3 border-b border-border text-right font-semibold text-primary">{formatCurrency(row.cumulative)}</td>
                             </tr>

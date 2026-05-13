@@ -28,6 +28,7 @@ export const DEFAULT_STATE = {
         inflationRate: 2.5,
         irr: 6.0,
         includeMaster: false,
+        weddingAge: 28,
         activeProfile: null as string | null,
         language: 'en'
     },
@@ -282,7 +283,7 @@ export const DEFAULT_STATE = {
             color: '#EC4899',
             ageRange: 'One-off Event',
             durationYears: 1,
-            startYear: 26,
+            startYear: 29,
             isOneOff: true,
             monthlyCosts: {
                 living: { amount: 0, enabled: false, yoyIncrease: 0 },
@@ -326,6 +327,15 @@ export class AppState {
             $effect.root(() => {
                 $effect(() => {
                     localStorage.setItem('childCostCalculatorState', JSON.stringify(this.data));
+                });
+                
+                // Sync marriage stage startYear with weddingAge setting (Year = Age + 1)
+                $effect(() => {
+                    const age = this.data.settings.weddingAge;
+                    const marriageStage = this.data.lifeStages.find((s: LifeStage) => s.isOneOff);
+                    if (marriageStage && marriageStage.startYear !== (age + 1)) {
+                        marriageStage.startYear = age + 1;
+                    }
                 });
             });
         }
@@ -465,11 +475,6 @@ export class AppState {
             if (endYear > maxYear) maxYear = endYear;
         });
 
-        const marriageStage = lifeStages.find((s: LifeStage) => s.isOneOff);
-        if (marriageStage) {
-            maxYear = Math.max(maxYear, marriageStage.startYear + 1);
-        }
-
         if (fixedCosts.homePurchase.enabled) {
             maxYear = Math.max(maxYear, fixedCosts.homePurchase.purchaseYear + fixedCosts.homePurchase.loanTermYears);
         }
@@ -478,126 +483,146 @@ export class AppState {
         let cumulative = 0;
 
         for (let year = 0; year < maxYear; year++) {
-            const inflationFactor = Math.pow(1 + inflationRate / 100, year);
+            // Global inflation only applies to fixed costs without their own YoY
+            const globalInflationFactor = Math.pow(1 + inflationRate / 100, year);
 
             let monthlyRecurring = 0;
             let yearlyOneOff = 0;
-            let ageLabel = '';
+            let currentAge = year === 0 ? -1 : year - 1;
+            let ageLabel = year === 0 ? 'Pre-birth' : `Age ${currentAge}`;
+            
             let activeStageStr = '';
             let activeStageColor = '#999';
             let activeStageIcon = '';
             let activeStageIsOneOff = false;
             
-            // For charting breakdown
-            let essentials = 0, devCare = 0, lifestyle = 0, off = 0;
+            // 6 Categories for chart
+            let catEssentials = 0, catDevelopment = 0, catLifestyle = 0, catYearly = 0, catHome = 0, catCar = 0;
 
             lifeStages.forEach((stage: LifeStage) => {
-                if (stage.isOptional && !settings.includeMaster) return;
-
                 const stageEnd = stage.startYear + (stage.durationYears || 1);
-                if (year >= stage.startYear && year < stageEnd) {
-                    activeStageStr = stage.title;
-                    activeStageColor = stage.color;
-                    activeStageIcon = stage.icon;
-                    activeStageIsOneOff = !!stage.isOneOff;
-                    ageLabel = stage.ageRange;
-
-                    // Sum monthly costs
-                    Object.entries(stage.monthlyCosts).forEach(([key, item]) => {
-                        const costItem = item as CostItem;
-                        if (costItem.enabled) {
-                            const inflated = costItem.amount * inflationFactor;
-                            monthlyRecurring += inflated;
-                            
-                            // Categorize
-                            if (['living', 'meals', 'clothing', 'medical'].includes(key)) essentials += inflated * 12;
-                            else if (['care', 'education', 'extraCurriculum'].includes(key)) devCare += inflated * 12;
-                            else if (key === 'entertainment') lifestyle += inflated * 12;
-                        }
-                    });
-
-                    // Sum yearly costs
-                    Object.entries(stage.yearlyCosts).forEach(([key, item]) => {
-                        const costItem = item as CostItem;
-                        if (costItem.enabled) {
-                            const inflated = costItem.amount * inflationFactor;
-                            yearlyOneOff += inflated;
-                            
-                            // Categorize
-                            if (key === 'insurance') devCare += inflated;
-                            else lifestyle += inflated;
-                        }
-                    });
-                }
-
-                // One-off costs (marriage)
-                if (stage.isOneOff && stage.oneOffCost && stage.oneOffCost.enabled) {
-                    if (year === stage.startYear) {
-                        yearlyOneOff += stage.oneOffCost.amount * inflationFactor;
-                        off += stage.oneOffCost.amount * inflationFactor;
-                        if (!ageLabel) ageLabel = stage.ageRange;
+                
+                // Regular stage costs
+                if (!(stage.isOptional && !settings.includeMaster)) {
+                    if (year >= stage.startYear && year < stageEnd && !stage.isOneOff) {
                         activeStageStr = stage.title;
                         activeStageColor = stage.color;
                         activeStageIcon = stage.icon;
-                        activeStageIsOneOff = !!stage.isOneOff;
+                        activeStageIsOneOff = false;
+
+                        // Local YoY applies starting from the SECOND year of the stage (yearsInStage > 0)
+                        const yearsInStage = year - stage.startYear;
+
+                        // Sum monthly costs
+                        Object.entries(stage.monthlyCosts).forEach(([key, item]) => {
+                            if (item.enabled) {
+                                // First year of stage (yearsInStage === 0) uses base amount exactly
+                                // Subsequent years use base amount * local YoY compounded
+                                const itemYoyFactor = Math.pow(1 + item.yoyIncrease / 100, yearsInStage);
+                                const currentMonthly = item.amount * itemYoyFactor;
+                                monthlyRecurring += currentMonthly;
+                                
+                                const currentAnnual = currentMonthly * 12;
+                                if (['living', 'meals', 'clothing', 'medical'].includes(key)) catEssentials += currentAnnual;
+                                else if (['care', 'education', 'extraCurriculum'].includes(key)) catDevelopment += currentAnnual;
+                                else if (key === 'entertainment') catLifestyle += currentAnnual;
+                            }
+                        });
+
+                        // Sum yearly costs
+                        Object.entries(stage.yearlyCosts).forEach(([key, item]) => {
+                            if (item.enabled) {
+                                const itemYoyFactor = Math.pow(1 + item.yoyIncrease / 100, yearsInStage);
+                                const currentYearly = item.amount * itemYoyFactor;
+                                yearlyOneOff += currentYearly;
+                                catYearly += currentYearly;
+                            }
+                        });
+                    }
+                }
+
+                // One-off costs (like marriage)
+                if (stage.isOneOff && stage.oneOffCost && stage.oneOffCost.enabled) {
+                    if (year === stage.startYear) {
+                        // User input is exactly what's shown in the year it happens
+                        const currentOneOff = stage.oneOffCost.amount;
+                        yearlyOneOff += currentOneOff;
+                        catYearly += currentOneOff;
+                        
+                        activeStageStr = stage.title;
+                        activeStageColor = stage.color;
+                        activeStageIcon = stage.icon;
+                        activeStageIsOneOff = true;
                     }
                 }
             });
 
-            // Fixed costs
+            // Home Related
             let mortgage = 0;
             if (fixedCosts.homePurchase.enabled) {
                 const home = fixedCosts.homePurchase;
                 const loanAmount = home.purchasePrice * (1 - home.downPaymentPct / 100);
                 const monthlyPayment = this.calculateMortgage(loanAmount, home.interestRate, home.loanTermYears);
                 
-                // If it's the purchase year, add down payment
+                // Down payment (adjusted by global inflation as it's a future capital outlay)
                 if (year === home.purchaseYear) {
-                    mortgage += (home.purchasePrice * (home.downPaymentPct / 100)) * inflationFactor;
+                    const downPayment = (home.purchasePrice * (home.downPaymentPct / 100)) * globalInflationFactor;
+                    mortgage += downPayment;
+                    catHome += downPayment;
                 }
                 
-                // Mortgage payments start from purchaseYear and last for loanTermYears
+                // Monthly payments (mortgage is fixed nominal, but we adjust for total projection value)
                 if (year >= home.purchaseYear && year < (home.purchaseYear + home.loanTermYears)) {
-                    mortgage += monthlyPayment * 12 * inflationFactor;
+                    const annualPayment = monthlyPayment * 12 * globalInflationFactor;
+                    mortgage += annualPayment;
+                    catHome += annualPayment;
                 }
-                
-                essentials += mortgage;
             }
 
+            // Car
             let car = 0;
             if (fixedCosts.carPurchase.enabled) {
                 const carData = fixedCosts.carPurchase;
                 const carYearInCycle = year % carData.lifecycleYears;
+                
+                // Purchase/Replacement (adjusted by inflation)
                 if (carYearInCycle === 0) {
-                    car += (carData.purchasePrice - carData.tradeInValue) * inflationFactor;
-                    off += (carData.purchasePrice - carData.tradeInValue) * inflationFactor;
+                    const purchaseCost = (carData.purchasePrice - carData.tradeInValue) * globalInflationFactor;
+                    car += purchaseCost;
+                    catCar += purchaseCost;
                 }
-                car += carData.monthlyRunningCosts * 12 * inflationFactor;
-                lifestyle += carData.monthlyRunningCosts * 12 * inflationFactor;
+                
+                // Running costs (adjusted by inflation)
+                const annualRunning = carData.monthlyRunningCosts * 12 * globalInflationFactor;
+                car += annualRunning;
+                catCar += annualRunning;
             }
 
-            const annualRecurring = monthlyRecurring * 12;
-            const totalAnnual = annualRecurring + yearlyOneOff + mortgage + car;
+            const totalAnnual = catEssentials + catDevelopment + catLifestyle + catYearly + catHome + catCar;
             cumulative += totalAnnual;
 
             result.push({
                 year,
-                age: ageLabel || `Year ${year}`,
-                lifeStage: activeStageStr,
+                age: ageLabel,
+                lifeStage: activeStageStr || 'Independent',
                 stageColor: activeStageColor,
-                stageIcon: activeStageIcon,
+                stageIcon: activeStageIcon || 'fa-user',
                 isOneOff: activeStageIsOneOff,
-                monthlyRecurring: Math.round(annualRecurring),
-                yearlyOneOff: Math.round(yearlyOneOff),
-                mortgage: Math.round(mortgage),
-                car: Math.round(car),
                 totalAnnual: Math.round(totalAnnual),
                 cumulative: Math.round(cumulative),
                 breakdown: {
-                    essentials: Math.round(essentials),
-                    devCare: Math.round(devCare),
-                    lifestyle: Math.round(lifestyle),
-                    oneOff: Math.round(off)
+                    essentials: Math.round(catEssentials),
+                    development: Math.round(catDevelopment),
+                    lifestyle: Math.round(catLifestyle),
+                    yearly: Math.round(catYearly),
+                    home: Math.round(catHome),
+                    car: Math.round(catCar)
+                },
+                components: {
+                    mortgage: Math.round(mortgage),
+                    car: Math.round(car),
+                    monthlyRecurring: Math.round(monthlyRecurring * 12),
+                    yearlyOneOff: Math.round(yearlyOneOff)
                 }
             });
         }

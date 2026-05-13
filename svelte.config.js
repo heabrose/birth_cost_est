@@ -11,7 +11,7 @@ const config = {
 			fallback: '404.html'
 		}),
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/birth_cost_est' : '',
+			base: process.env.NODE_ENV === 'development' ? '' : (process.env.BASE_PATH || '/birth_cost_est'),
 		}
 	}
 };

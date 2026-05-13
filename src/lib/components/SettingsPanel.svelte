@@ -33,6 +33,12 @@
                 </label>
                 <span class="text-[0.875rem] font-medium">{$_('settings.includeMaster')}</span>
             </div>
+            <div class="flex flex-col gap-1.5">
+                <label for="settingWeddingAge" class="text-[0.8125rem] font-medium text-text-secondary">{$_('settings.weddingAge')}</label>
+                <div class="input-wrapper">
+                    <input type="number" id="settingWeddingAge" step="1" min="18" max="100" bind:value={appState.data.settings.weddingAge}>
+                </div>
+            </div>
         </div>
     </div>
 </div>
