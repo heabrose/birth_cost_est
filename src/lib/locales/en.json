@@ -1,0 +1,132 @@
+{
+  "app": {
+    "title": "Child Cost Calculator",
+    "subtitle": "Plan. Invest. Secure Their Future."
+  },
+  "nav": {
+    "calculator": "Calculator",
+    "projection": "Cash Flow Projection"
+  },
+  "actions": {
+    "quickPresets": "Quick Presets:",
+    "exportJson": "Export JSON",
+    "importJson": "Import JSON",
+    "resetAll": "Reset All",
+    "frugal": "Frugal",
+    "average": "Average",
+    "premium": "Premium"
+  },
+  "settings": {
+    "title": "Settings",
+    "inflationRate": "Expected Annual Inflation Rate (%)",
+    "irr": "Expected Annual Return / IRR (%)",
+    "includeMaster": "Include Master's Degree"
+  },
+  "fixedCosts": {
+    "title": "Fixed Capital Expenses",
+    "subtitle": "Large one-time purchases that significantly impact total cost.",
+    "homePurchase": "Home Purchase",
+    "purchasePrice": "Purchase Price",
+    "purchaseYear": "Purchase Year",
+    "downPayment": "Down Payment %",
+    "interestRate": "Interest Rate",
+    "loanTerm": "Loan Term (Years)",
+    "estimatedMonthlyMortgage": "Estimated Monthly Mortgage",
+    "carPurchase": "Car Purchase",
+    "tradeInValue": "Trade-in Value",
+    "replaceEvery": "Replace Every (Years)",
+    "monthlyRunningCosts": "Monthly Running Costs",
+    "netCostPerCycle": "Net Cost Per Cycle"
+  },
+  "lifeStages": {
+    "title": "Life Stage Costs",
+    "subtitle": "Set year-on-year % increase for each item. Click Populate to apply a stage's YoY% to all subsequent stages.",
+    "monthlyEssentials": "Monthly — Essentials",
+    "monthlyDevCare": "Monthly — Development & Care",
+    "monthlyLifestyle": "Monthly — Lifestyle",
+    "yearlyOneOff": "Yearly / One-off",
+    "populateBtn": "Populate YoY% →",
+    "populateHint": "Apply this stage's YoY% values to all later stages",
+    "weddingCost": "Wedding Cost"
+  },
+  "costItems": {
+    "living": "Living",
+    "meals": "Meals",
+    "clothing": "Clothing",
+    "medical": "Medical",
+    "care": "Care / Nanny / Helper",
+    "education": "Education",
+    "extraCurriculum": "Extra Curriculum",
+    "entertainment": "Entertainment",
+    "springTravel": "Spring Travel",
+    "summerTravel": "Summer Travel",
+    "winterTravel": "Winter Travel",
+    "summerCamps": "Summer Camps",
+    "schoolTrips": "School Trips",
+    "insurance": "Insurance"
+  },
+  "stages": {
+    "pre_birth": "Pre-birth",
+    "infant_0_2": "Infant",
+    "preschool_3_5": "Pre-school",
+    "primary_6_11": "Primary School",
+    "secondary_12_15": "Secondary School",
+    "highschool_16_17": "High School",
+    "bachelor_18_21": "Bachelor",
+    "master_22_24": "Master",
+    "marriage": "Marriage"
+  },
+  "results": {
+    "title": "Projected Cash Flow",
+    "viewDetailedBreakdown": "View Detailed Yearly Breakdown",
+    "viewFullProjection": "View Full Cash Flow Projection →",
+    "chart": {
+      "essentials": "Essentials",
+      "devCare": "Dev & Care",
+      "lifestyle": "Lifestyle",
+      "oneOff": "One-off"
+    },
+    "table": {
+      "year": "Year",
+      "age": "Age/Stage",
+      "lifeStage": "Life Stage",
+      "monthlyEssentials": "Monthly Essentials",
+      "monthlyDevCare": "Monthly Dev & Care",
+      "monthlyLifestyle": "Monthly Lifestyle",
+      "yearlyOneOff": "Yearly / One-off",
+      "homeRelated": "Home Related",
+      "car": "Car",
+      "totalAnnual": "Total Annual",
+      "cumulative": "Cumulative",
+      "cumulativeTotalShown": "Cumulative Total (shown):",
+      "showingFirst6Years": "Showing first 6 years.",
+      "yoyChange": "YoY Change %",
+      "oneOffLabel": "One-off"
+    },
+    "projection": {
+      "title": "Cash Outflow Projection",
+      "subtitle": "Detailed year-by-year breakdown of all estimated costs",
+      "totalCost": "Total Estimated Cost",
+      "initialInvestment": "Required Initial Investment",
+      "projectionYears": "Projection Years",
+      "backToCalculator": "Back to Calculator",
+      "inflationRate": "Inflation Rate",
+      "expectedReturn": "Expected Return (IRR)",
+      "masterIncluded": "Master's Included",
+      "profile": "Profile",
+      "none": "None",
+      "summaryTitle": "Projection Summary",
+      "yearsProjected": "Years Projected",
+      "avgAnnualCost": "Average Annual Cost",
+      "peakAnnualCost": "Peak Annual Cost",
+      "npvAllCosts": "NPV of All Costs"
+    }
+  },
+  "sticky": {
+    "totalEstimatedCost": "Total Estimated Cost",
+    "requiredInitialInvestment": "Required Initial Investment (NPV)",
+    "viewProjection": "View Projection →",
+    "recalculate": "Recalculate"
+  },
+  "footer": "Child Cost Calculator. Plan wisely for their future."
+}

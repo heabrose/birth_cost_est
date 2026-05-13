@@ -1,0 +1,132 @@
+{
+  "app": {
+    "title": "育兒成本計算器",
+    "subtitle": "規劃。投資。保障他們的未來。"
+  },
+  "nav": {
+    "calculator": "計算器",
+    "projection": "現金流預測"
+  },
+  "actions": {
+    "quickPresets": "快速預設：",
+    "exportJson": "匯出 JSON",
+    "importJson": "匯入 JSON",
+    "resetAll": "全部重置",
+    "frugal": "節儉",
+    "average": "平均",
+    "premium": "優質"
+  },
+  "settings": {
+    "title": "設定",
+    "inflationRate": "預期年通貨膨脹率 (%)",
+    "irr": "預期年回報率 / IRR (%)",
+    "includeMaster": "包含碩士學位"
+  },
+  "fixedCosts": {
+    "title": "固定資本支出",
+    "subtitle": "顯著影響總成本的大額一次性購買。",
+    "homePurchase": "購房",
+    "purchasePrice": "購買價格",
+    "purchaseYear": "購買年份",
+    "downPayment": "首付比例 %",
+    "interestRate": "利率",
+    "loanTerm": "貸款期限 (年)",
+    "estimatedMonthlyMortgage": "預估每月房貸",
+    "carPurchase": "購車",
+    "tradeInValue": "舊車折抵價值",
+    "replaceEvery": "更換週期 (年)",
+    "monthlyRunningCosts": "每月營運成本",
+    "netCostPerCycle": "每個週期的淨成本"
+  },
+  "lifeStages": {
+    "title": "各階段成本",
+    "subtitle": "設定每個項目的年增長率 (%)。點擊「套用」將此階段的年增長率套用到後續所有階段。",
+    "monthlyEssentials": "每月 — 必需品",
+    "monthlyDevCare": "每月 — 發展與照護",
+    "monthlyLifestyle": "每月 — 生活方式",
+    "yearlyOneOff": "每年 / 一次性",
+    "populateBtn": "套用年增長率 →",
+    "populateHint": "將此階段的年增長率數值套用到後續所有階段",
+    "weddingCost": "婚禮費用"
+  },
+  "costItems": {
+    "living": "生活費",
+    "meals": "餐費",
+    "clothing": "衣物",
+    "medical": "醫療",
+    "care": "照護 / 保姆 / 幫傭",
+    "education": "教育",
+    "extraCurriculum": "課外活動",
+    "entertainment": "娛樂",
+    "springTravel": "春季旅遊",
+    "summerTravel": "夏季旅遊",
+    "winterTravel": "冬季旅遊",
+    "summerCamps": "夏令營",
+    "schoolTrips": "學校旅行",
+    "insurance": "保險"
+  },
+  "stages": {
+    "pre_birth": "出生前",
+    "infant_0_2": "嬰兒期",
+    "preschool_3_5": "學前",
+    "primary_6_11": "小學",
+    "secondary_12_15": "中學",
+    "highschool_16_17": "高中",
+    "bachelor_18_21": "大學",
+    "master_22_24": "碩士",
+    "marriage": "婚禮"
+  },
+  "results": {
+    "title": "預估現金流",
+    "viewDetailedBreakdown": "查看年度詳細明細",
+    "viewFullProjection": "查看完整現金流預測 →",
+    "chart": {
+      "essentials": "基礎生活",
+      "devCare": "發展與照護",
+      "lifestyle": "生活方式",
+      "oneOff": "一次性支出"
+    },
+    "table": {
+      "year": "年份",
+      "age": "年齡/階段",
+      "lifeStage": "人生階段",
+      "monthlyEssentials": "每月必需品",
+      "monthlyDevCare": "每月發展與照護",
+      "monthlyLifestyle": "每月生活方式",
+      "yearlyOneOff": "每年/一次性",
+      "homeRelated": "住房相關",
+      "car": "車輛",
+      "totalAnnual": "年度總計",
+      "cumulative": "累計",
+      "cumulativeTotalShown": "累計總計（顯示部分）：",
+      "showingFirst6Years": "顯示前 6 年。",
+      "yoyChange": "年增率 %",
+      "oneOffLabel": "一次性"
+    },
+    "projection": {
+      "title": "現金流預測",
+      "subtitle": "所有預估成本的詳細年度明細",
+      "totalCost": "總預估成本",
+      "initialInvestment": "所需初始投資",
+      "projectionYears": "預測年份",
+      "backToCalculator": "返回計算器",
+      "inflationRate": "通貨膨脹率",
+      "expectedReturn": "預期回報率 (IRR)",
+      "masterIncluded": "包含碩士",
+      "profile": "配置檔",
+      "none": "無",
+      "summaryTitle": "預測摘要",
+      "yearsProjected": "預測年數",
+      "avgAnnualCost": "平均年度成本",
+      "peakAnnualCost": "高峰年度成本",
+      "npvAllCosts": "總成本淨現值 (NPV)"
+    }
+  },
+  "sticky": {
+    "totalEstimatedCost": "總預估成本",
+    "requiredInitialInvestment": "所需初始投資 (NPV)",
+    "viewProjection": "查看預測 →",
+    "recalculate": "重新計算"
+  },
+  "footer": "育兒成本計算器。為他們的未來明智規劃。"
+}
